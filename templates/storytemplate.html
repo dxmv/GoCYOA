@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Story - {{.Title}}</title>
+		<style>
+			@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+			* {
+				margin: 0;
+				padding: 0;
+				font-family: "Montserrat", sans-serif;
+				box-sizing: border-box;
+			}
+			body {
+				padding: 50px;
+			}
+			#story {
+				background-color: #fca311;
+				border-radius: 20px;
+				display: flex;
+				flex-direction: column;
+				padding: 10px 15px;
+				border: 2px solid black;
+				box-shadow: 5px 5px 8px 5px #e5e5e5;
+			}
+			h1 {
+				color: #000000;
+				text-align: center;
+				margin-bottom: 10px;
+			}
+			#options {
+				display: flex;
+				justify-content: space-between;
+				margin-top: 30px;
+				width: 80%;
+				align-self: center;
+			}
+			.option {
+				border: 1px solid black;
+				padding: 10px;
+				border-radius: 20px;
+				max-width: 30%;
+				text-align: center;
+				margin-bottom: 20px;
+			}
+			.option:hover {
+				cursor: pointer;
+				box-shadow: 1px 1px 5px 1px;
+			}
+			h3 {
+				margin-bottom: 5px;
+			}
+			.para {
+				text-align: center;
+			}
+		</style>
+		<script>
+			const URL = "http://localhost:8080";
+			const continueStory = e => {
+				location.href = `${URL}/${e.dataset.arc}`;
+			};
+		</script>
+	</head>
+	<body>
+		<div id="story">
+			<h1>{{.Title}}</h1>
+			<div>
+				{{range .Story}}
+				<p class="para">{{.}}</p>
+				{{end}}
+			</div>
+			<div id="options">
+				{{range .Options}}
+				<div class="option" onclick="continueStory(this)" data-arc="{{.Arc}}">
+					<h3>Arc: {{.Arc}}</h3>
+					<p>{{.Text}}</p>
+				</div>
+				{{end}}
+			</div>
+		</div>
+	</body>
+</html>
